@@ -77,7 +77,7 @@ class LinkedList:
         prev_node.next=curr_node.next
         curr_node=None
 
-    def lenlist(self):
+    def len_list(self):
         curr_node=self.head
         len=0
         while curr_node:
@@ -85,12 +85,71 @@ class LinkedList:
             curr_node=curr_node.next
         return len
 
+    def swap_nodes(self,key1,key2):
+        #fetch prev and next for key1
+        curr_node1=self.head
+        prev1=None
+        while curr_node1.data!=key1:
+            prev1=curr_node1
+            curr_node1=curr_node1.next
+        next1=curr_node1.next
+        # fetch prev and next for key2
+        curr_node2 = self.head
+        prev2 = None
+        while curr_node2.data != key2:
+            prev2 = curr_node2
+            curr_node2 = curr_node2.next
+        next2 = curr_node2.next
+        #swap
+        #In case swapping Head and tails
+        if not next1 and next2:
+            curr_node2.next = next1
+            self.head = curr_node2
+
+            prev2.next = curr_node1
+            curr_node1.next = None
+            return
+
+        #In case we are swapping the head node
+
+        if not prev1:
+            curr_node2.next = next1
+            self.head=curr_node2
+
+            prev2.next=curr_node1
+            curr_node1.next = next2
+            return
+
+        #Incase we are swapping the last node
+        if not next2:
+            prev1.next=curr_node2
+            curr_node2.next = next1
+
+            prev2.next = curr_node1
+            curr_node1.next = None
+            return
+
+        prev1.next=curr_node2
+        curr_node2.next=next1
+
+        prev2.next=curr_node1
+        curr_node1.next=next2
+
 llist = LinkedList()
-llist.append("A")
 llist.append("B")
 llist.append("C")
-llist.prepend("D")
-llist.insert_after_node("C","E")
-llist.delete_node_pos(3)
+llist.append("D")
+llist.prepend("A")
+
+sw_a,sw_b="A","E"
+
+llist.insert_after_node("D","E")
+#llist.delete_node_pos(3)
 llist.print_list()
-print(llist.lenlist())
+
+print(f"Swapping Node {sw_a} to {sw_b}")
+
+llist.swap_nodes(sw_a,sw_b)
+
+llist.print_list()
+#print(llist.len_list())
