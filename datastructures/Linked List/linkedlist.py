@@ -19,13 +19,16 @@ class LinkedList:
         last_node.next = new_node
 
     def print_list(self):
+        res="Head="
         if self.head is None:
             print("No elements in the list")
         else:
             curr_node=self.head
             while curr_node:
-                print(curr_node.data)
+                res+=curr_node.data+"->"
+                #print(curr_node.data)
                 curr_node=curr_node.next
+            print(res+"None")
 
     def prepend(self,data):
         new_node=Node(data)
@@ -135,6 +138,16 @@ class LinkedList:
         prev2.next=curr_node1
         curr_node1.next=next2
 
+    def reverse_list(self):
+        curr_node=self.head
+        prev=None
+        while curr_node:
+            next=curr_node.next
+            curr_node.next=prev
+            prev=curr_node
+            curr_node=next
+        self.head=prev
+
 llist = LinkedList()
 llist.append("B")
 llist.append("C")
@@ -146,10 +159,13 @@ sw_a,sw_b="A","E"
 llist.insert_after_node("D","E")
 #llist.delete_node_pos(3)
 llist.print_list()
-
-print(f"Swapping Node {sw_a} to {sw_b}")
-
-llist.swap_nodes(sw_a,sw_b)
-
+print(f"Total elements in  list: {llist.len_list()}")
+# print(f"Swapping Node {sw_a} to {sw_b}")
+#
+# llist.swap_nodes(sw_a,sw_b)
+#
+# llist.print_list()
+print("Reversing the list")
+llist.reverse_list()
 llist.print_list()
-#print(llist.len_list())
+
