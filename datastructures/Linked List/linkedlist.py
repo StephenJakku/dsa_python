@@ -148,6 +148,32 @@ class LinkedList:
             curr_node=next
         self.head=prev
 
+    def merge_sorted_lists(self,list):
+        curr_node_list1= self.head
+        curr_node_list2=list.head
+        merged_list=None
+
+        while curr_node_list1 and curr_node_list2:
+                if curr_node_list1.data<curr_node_list2.data:
+                    if merged_list is None:
+                        merged_list=curr_node_list1
+                    else:
+                        merged_list.next = curr_node_list1
+                    curr_node_list1=curr_node_list1.next
+
+                else:
+                    if merged_list is None:
+                        merged_list = curr_node_list2
+                    else:
+                        merged_list.next = curr_node_list2
+                    curr_node_list2=curr_node_list2.next
+
+        while merged_list:
+            print(merged_list.data)
+            merged_list=merged_list.next
+
+
+
 llist = LinkedList()
 llist.append("B")
 llist.append("C")
@@ -159,13 +185,20 @@ sw_a,sw_b="A","E"
 llist.insert_after_node("D","E")
 #llist.delete_node_pos(3)
 llist.print_list()
-print(f"Total elements in  list: {llist.len_list()}")
-# print(f"Swapping Node {sw_a} to {sw_b}")
-#
-# llist.swap_nodes(sw_a,sw_b)
-#
-# llist.print_list()
-print("Reversing the list")
-llist.reverse_list()
-llist.print_list()
+# print(f"Total elements in  list: {llist.len_list()}")
+# # print(f"Swapping Node {sw_a} to {sw_b}")
+# #
+# # llist.swap_nodes(sw_a,sw_b)
+# #
+# # # llist.print_list()
+# # print("Reversing the list")
+# # llist.reverse_list()
+# # llist.print_list()
+llist1 = LinkedList()
+llist1.append("B")
+llist1.append("C")
+llist1.append("D")
+
+llist.merge_sorted_lists(llist1)
+
 
